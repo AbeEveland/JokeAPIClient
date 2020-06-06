@@ -18,19 +18,10 @@ namespace OneListClient
         }
         static async Task showTenJokes(string token)
         {
-
-
             var client = new HttpClient();
-
             var url = $"https://official-joke-api.appspot.com/jokes/programming/ten";
-
-
             var getTenJokes = await client.GetStreamAsync(url);
-
             var tenJokes = await JsonSerializer.DeserializeAsync<List<OfficialJokeAPIItem>>(getTenJokes);
-
-
-
             var table = new ConsoleTable("id", "type", "setup");
 
             foreach (var item in tenJokes)
@@ -41,37 +32,19 @@ namespace OneListClient
         }
         static async Task oneRandomJoke()
         {
-            //try
-            //{
             var client = new HttpClient();
-
             var url = $"https://official-joke-api.appspot.com/random_joke";
             var getRandomJoke = await client.GetStreamAsync(url);
             var randomJoke = await JsonSerializer.DeserializeAsync<OfficialJokeAPIItem>(getRandomJoke);
-            //var table = new ConsoleTable("id", "type", "setup");
-
-
-
+           
             Console.WriteLine(randomJoke.setup);
-            Console.WriteLine(randomJoke.punchline);
-
-
-
-
-            //}
-
-
-            // catch (HttpRequestException)
-
-            // {
-            //     Console.WriteLine("I could not find that item!");
-            // }
+            Console.WriteLine(randomJoke.punchline)
         }
 
         static async Task Main(string[] args)
         {
-
             var token = "";
+         
             if (args.Length == 0)
             {
                 Console.Write("What jokes would you like? ");
@@ -106,7 +79,6 @@ namespace OneListClient
                         break;
                 }
             }
-
         }
     }
 }
